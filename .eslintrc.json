@@ -20,6 +20,7 @@
         "space-before-blocks":"off",
         "consistent-return":"off",
         "object-curly-newline":"off",
-        "max-len":"off"
+        "max-len":"off",
+        "prefer-const":"off"
     }
 }

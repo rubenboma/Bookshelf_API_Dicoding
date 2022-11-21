@@ -1,5 +1,5 @@
 const books = [];
 
-const detailBookToDisplay = [];
+const detailBook = [];
 
-module.export = books;
+module.exports = { books, detailBook };

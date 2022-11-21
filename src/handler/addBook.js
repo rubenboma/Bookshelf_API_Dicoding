@@ -1,5 +1,7 @@
 const { nanoid } = require('nanoid');
-const books = require('../books');
+const { books, detailBook } = require('../books');
+
+const tempoData = [];
 
 const addBook = (request, h) => {
     const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
@@ -10,13 +12,11 @@ const addBook = (request, h) => {
     const updatedAt = insertedAt;
     
     const detailData = { id, name, year, author, summary, publisher, pageCount, finished, readPage, reading, insertedAt, updatedAt };
-
-    // const displayData = { id, name, publisher };
-
-    books.push(detailData);
-
-    const isSuccess = books.filter((book) => book.id === id).length > 0;
-
+    const displayData = { id, name, publisher };
+    tempoData.push(detailData);
+    
+    const isSuccess = tempoData.filter((book) => book.id === id).length > 0;
+  
     if (name === undefined){
         const response = h.response({
             status: 'fail',
@@ -25,7 +25,7 @@ const addBook = (request, h) => {
         response.code(400);
         return response;
     }
-
+    
     if (readPage > pageCount){
         const response = h.response({
             status: 'fail',
@@ -35,6 +35,8 @@ const addBook = (request, h) => {
         return response;
     }
     if (isSuccess){
+        books.push(displayData);
+        detailBook.push(detailData);
         const response = h.response({
             status: 'success',
             message: 'Buku berhasil ditambahkan',
@@ -43,7 +45,6 @@ const addBook = (request, h) => {
         response.code(201);
         return response;
     }
-    
     if (!isSuccess){
         const response = h.response({
             status: 'fail',
