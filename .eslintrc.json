@@ -12,5 +12,14 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-console":"off",
+        "linebreak-style":"off",
+        "indent":"off",
+        "no-unused-vars":"off",
+        "no-trailing-spaces":"off",
+        "space-before-blocks":"off",
+        "consistent-return":"off",
+        "object-curly-newline":"off",
+        "max-len":"off"
     }
 }
