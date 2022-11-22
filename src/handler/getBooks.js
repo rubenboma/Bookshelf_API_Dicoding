@@ -4,7 +4,7 @@ const getBooks = (request, h) => {
     const { name, reading, finished } = request.query;
     
     if (name !== undefined){
-        const bookByName = books.filter((book) => book.name.toUpperCase() === name.toUpperCase());
+        const bookByName = books.filter((book) => book.name.toUpperCase().includes(name.toUpperCase()));
         const response = h.response({
             status: 'success',
             data: { books: bookByName },
@@ -48,6 +48,47 @@ const getBooks = (request, h) => {
         const response = h.response({
             status: 'fail',
             message: 'reading hanya menerima value 1 = true dan 0 = false',
+        });
+        response.code(400);
+        return response;
+    }
+
+    if (finished !== undefined){
+        const finishedBooks = detailBook.filter((book) => book.finished === true);
+        const unfinishedBooks = detailBook.filter((book) => book.finished === false);
+
+        if (finished === '1'){
+            const response = h.response({
+                status: 'success',
+                data: {
+                    books: finishedBooks.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            });
+            response.code(200);
+            return response;
+        }
+
+        if (finished === '0'){
+            const response = h.response({
+                status: 'success',
+                data: {
+                    books: unfinishedBooks.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            });
+            response.code(200);
+            return response;
+        }
+        const response = h.response({
+            status: 'fail',
+            message: 'finished hanya menerima value 1 = true dan 0 = false',
         });
         response.code(400);
         return response;

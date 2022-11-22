@@ -1,5 +1,5 @@
 addbooks = true;
-getBooks = false; => name function && reading function => done
+getBooks = true;
 getBookById = true;
 updateBookById = true;
 deleteBookById = true;
