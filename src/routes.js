@@ -1,5 +1,5 @@
 const addBook = require('./handler/addBook');
-const getBooks = require('./handler/getAllBooks2');
+const getBooks = require('./handler/getBooks');
 const getBookById = require('./handler/getBookById');
 const updateBookById = require('./handler/updateBookById');
 const deleteBookById = require('./handler/deleteBook');
