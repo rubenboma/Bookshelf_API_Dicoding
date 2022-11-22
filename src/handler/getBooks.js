@@ -2,13 +2,10 @@ let { books, detailBook } = require('../books');
 
 const getBooks = (request, h) => {
     const { name, reading, finished } = request.query;
-
-    const bookByName = detailBook.filter((book) => book.name.toUpperCase().include(name.toUpperCase()));
-    let bookReading = detailBook.filter((book) => book.reading === true);
-    let bookFinished = detailBook.filter((book) => book.finished === true);
-
+ 
     if (name !== undefined){
-         books = bookByName;
+        const bookByName = books.filter((book) => book.name.toUpperCase().include(name.toUpperCase()));
+        books = bookByName;
         const response = h.response({
             status: 'success',
             data: { books },
@@ -18,6 +15,7 @@ const getBooks = (request, h) => {
     }
 
     if (reading !== undefined){
+        const bookReading = detailBook.filter((book) => book.reading === true);
         if (reading === 1){
             books = bookReading;
             const response = h.response({
@@ -39,6 +37,7 @@ const getBooks = (request, h) => {
     }
 
     if (finished !== undefined){
+        let bookFinished = detailBook.filter((book) => book.finished === true);
         if (finished === 1){
             books = bookFinished;
             const response = h.response({
@@ -59,7 +58,7 @@ const getBooks = (request, h) => {
         }
     }
 
-    if (name === undefined && reading === undefined && finished === undefined){
+    if (name === undefined){
         const response = h.response({
             status: 'success',
             data: {
@@ -67,8 +66,30 @@ const getBooks = (request, h) => {
             },
         });
         response.code(200);
-        return response;
+        return response;  
     }
+
+    // if (reading === undefined){
+    //     const response = h.response({
+    //         status: 'success',
+    //         data: {
+    //             books,
+    //         },
+    //     });
+    //     response.code(200);
+    //     return response;  
+    // }
+
+    // if (finished === undefined){
+    //     const response = h.response({
+    //         status: 'success',
+    //         data: {
+    //             books,
+    //         },
+    //     });
+    //     response.code(200);
+    //     return response;  
+    // }
 };
 
 module.exports = getBooks;

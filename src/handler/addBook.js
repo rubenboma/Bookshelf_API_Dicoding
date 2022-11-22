@@ -17,7 +17,7 @@ const addBook = (request, h) => {
     
     const isSuccess = tempoData.filter((book) => book.id === id).length > 0;
   
-    if (name === undefined){
+    if (name === undefined || name === ''){
         const response = h.response({
             status: 'fail',
             message: 'Gagal menambahkan buku. Mohon isi nama buku',
